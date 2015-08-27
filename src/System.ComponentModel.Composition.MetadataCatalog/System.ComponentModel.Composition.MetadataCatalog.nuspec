@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>System.ComponentModel.Composition.MetadataCatalog</id>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <summary>A set of fast MEF catalogs not based on reflection.</summary>
+    <description>
+      MEF catalogs (MetadataDirectoryCatalog, MetadataAssemblyCatalog and MetadataTypeCatalog) that are based on a fast metadata reader instead of Reflection.
+    </description>
+    <dependencies>
+      <dependency id="Microsoft.Bcl.Immutable" version="1.1.20-beta" />
+      <dependency id="Microsoft.Bcl.Metadata" version="1.0.9-alpha" />
+    </dependencies>
+
+    <language>en-US</language>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <version>$currentVersion$</version>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/kirillosenkov/MEFMetadata</projectUrl>
+    <releaseNotes></releaseNotes>
+    <tags>MEF Metadata MetadataReader Reflection Composition ComponentModel</tags>
+  </metadata>
+  <files>
+    <file src="Microsoft.Composition.Metadata.dll" target="lib\net45" />
+    <file src="System.ComponentModel.Composition.MetadataCatalog.dll" target="lib\net45" />
+  </files>
+</package>

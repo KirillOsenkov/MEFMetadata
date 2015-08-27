@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SrcRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), Common.props))</SrcRoot>
+    <ProjectGuid>{07021B11-606F-4D62-B45D-66EAA0332879}</ProjectGuid>
+    <AssemblyName>TestAssemblyC</AssemblyName>
+  </PropertyGroup>
+  <Import Project="$(SrcRoot)\Common.props" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestAssemblyA\TestAssemblyA.csproj">
+      <Project>{61EB6435-8B75-4607-866D-5B7F67718156}</Project>
+      <Name>TestAssemblyA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAssemblyB\TestAssemblyB.csproj">
+      <Project>{743af143-4a2a-47cd-a200-2ec0cddf8389}</Project>
+      <Name>TestAssemblyB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SrcRoot)\Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,81 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup Condition=" '$(PackageSources)' == '' ">
+    <!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
+    <!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->
+    <PackageSource Include="https://www.nuget.org/api/v2/" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <NuGetVersion>1.0.7-beta</NuGetVersion>
+    <NuGetExePath>$(SrcRoot)\NuGet.exe</NuGetExePath>
+    <PackagesConfig Condition="Exists('$(MSBuildProjectDirectory)\packages.config')">$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+    <BuildDependsOn Condition="$(RestorePackages) == 'true' AND Exists('$(PackagesConfig)')">
+      RestorePackages;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+    <RestoreCommand>$(NuGetExePath) install "$(PackagesConfig)" -source "@(PackageSource)" -NonInteractive -solutionDir "$(SolutionDir) "</RestoreCommand>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <NuGetInput>
+      <Visible>False</Visible>
+    </NuGetInput>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <NuGetInput Include="$(MSBuildProjectDirectory)\$(AssemblyName).nuspec" />
+    <NuGetInput Include="$(MSBuildThisFile)" />
+  </ItemGroup>
+
+  <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet" BeforeTargets="BeforeBuild">
+    <Exec Command="$(RestoreCommand)"
+          LogStandardErrorAsError="true"
+          Condition="Exists('$(PackagesConfig)')" />
+  </Target>
+
+  <Target Name="BuildNuGet"
+          AfterTargets="CoreBuild"
+          Condition="Exists('$(MSBuildProjectDirectory)\$(AssemblyName).nuspec')"
+          DependsOnTargets="CopyFilesToOutputDirectory;_DownloadNuGet"
+          Inputs="@(NuGetInput)"
+          Outputs="$(OutDir)\$(AssemblyName).$(NuGetVersion).nupkg">
+    <Exec Command="$(SrcRoot)\NuGet.exe Pack $(AssemblyName).nuspec -BasePath $(OutDir) -OutputDirectory $(OutDir) -prop currentVersion=$(NuGetVersion)" />
+  </Target>
+
+  <Target Name="_DownloadNuGet">
+    <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition="!Exists('$(NuGetExePath)')" />
+  </Target>
+
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try {
+                    OutputFilename = Path.GetFullPath(OutputFilename);
+
+                    Log.LogMessage("Downloading latest version of NuGet.exe...");
+                    WebClient webClient = new WebClient();
+                    webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
+
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>

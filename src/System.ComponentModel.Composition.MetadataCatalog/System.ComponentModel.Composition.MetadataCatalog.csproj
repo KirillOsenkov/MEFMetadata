@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SrcRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), Common.props))</SrcRoot>
+    <ProjectGuid>{4FEE3163-7D25-444A-A1DE-0D2A16E9BB02}</ProjectGuid>
+    <AssemblyName>System.ComponentModel.Composition.MetadataCatalog</AssemblyName>
+  </PropertyGroup>
+  <Import Project="$(SrcRoot)\Common.props" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Microsoft\Internal\AttributeServices.cs" />
+    <Compile Include="System\ComponentModel\Composition\CompositionDumper.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\IMetadataInfo.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataInfo.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataTypeCatalog.Exports.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataDirectoryCatalog.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataTypeCatalog.DirtyHackery.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataAssemblyCatalog.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataTypeCatalog.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\MetadataTypeCatalog.Imports.cs" />
+    <Compile Include="System\ComponentModel\Composition\Hosting\ReflectionHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Composition.Metadata\Microsoft.Composition.Metadata.csproj">
+      <Project>{f094c561-473e-47fe-8421-749ef12993de}</Project>
+      <Name>Microsoft.Composition.Metadata</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="System.ComponentModel.Composition.MetadataCatalog.nuspec" />
+  </ItemGroup>
+  <Import Project="$(SrcRoot)\Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

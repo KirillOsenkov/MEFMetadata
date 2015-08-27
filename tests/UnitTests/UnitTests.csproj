@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SrcRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), Common.props))</SrcRoot>
+    <ProjectGuid>{E8AAB690-DEC9-4B47-A39F-DE53A6E6C9A7}</ProjectGuid>
+    <AssemblyName>UnitTests</AssemblyName>
+  </PropertyGroup>
+  <Import Project="$(SrcRoot)\Common.props" />
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TestComposition.cs" />
+    <Compile Include="TestDiscovery.cs" />
+    <Compile Include="TestMetadataInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\System.ComponentModel.Composition.MetadataCatalog\System.ComponentModel.Composition.MetadataCatalog.csproj">
+      <Project>{4fee3163-7d25-444a-a1de-0d2a16e9bb02}</Project>
+      <Name>System.ComponentModel.Composition.MetadataCatalog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Microsoft.Composition.Metadata\Microsoft.Composition.Metadata.csproj">
+      <Project>{f094c561-473e-47fe-8421-749ef12993de}</Project>
+      <Name>Microsoft.Composition.Metadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAssemblyA\TestAssemblyA.csproj">
+      <Project>{61eb6435-8b75-4607-866d-5b7f67718156}</Project>
+      <Name>TestAssemblyA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAssemblyB\TestAssemblyB.csproj">
+      <Project>{743af143-4a2a-47cd-a200-2ec0cddf8389}</Project>
+      <Name>TestAssemblyB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestHost\TestHost.csproj">
+      <Project>{1f08fd1e-ea38-47ed-946e-3f2d9a9b67a1}</Project>
+      <Name>TestHost</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(SrcRoot)\Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
