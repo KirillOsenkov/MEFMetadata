@@ -11,6 +11,9 @@ The whole deal is even possible because .NET metadata has a special table for cu
 reference System.ComponentModel.Composition.MetadataCatalog.dll and replace usages of AssemblyCatalog with MetadataAssemblyCatalog in your MEF code (also try MetadataDirectoryCatalog).
 Use CompositionDumper.WriteTo(myCompositionContainer, "dump.txt") to output the contents of the composition before and after using MetadataAssemblyCatalog. If you diff the files, they should be identical. If they're not, it means the library has a bug, please open a GitHub issue.
 
+## NuGet
+https://www.nuget.org/packages/System.ComponentModel.Composition.MetadataCatalog
+
 ## Current known issues:
  * inherited exports are not supported yet.
  * be careful of where the assembly actually gets loaded vs. the file path you pass to MetadataAssemblyCatalog. It may happen (though unlikely) that the assembly will be loaded from a different location then what you specified. In this case you might get weird exceptions, check Debug -> Windows -> Modules to see where the assembly is being loaded from.
