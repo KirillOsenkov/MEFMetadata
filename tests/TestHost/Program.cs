@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime;
 using System.Threading.Tasks;
-using Microsoft.Build.Framework;
 using Microsoft.Composition.Metadata;
 
 namespace TestHost
@@ -29,57 +26,6 @@ namespace TestHost
         private static readonly string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly string compositionCacheFile = Path.Combine(currentDirectory, "VSMef.Composition.cache");
 
-        public class TaskItem : ITaskItem
-        {
-            public TaskItem(string itemSpec)
-            {
-                this.ItemSpec = itemSpec;
-            }
-
-            public string ItemSpec { get; set; }
-
-            public int MetadataCount
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public ICollection MetadataNames
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public IDictionary CloneCustomMetadata()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void CopyMetadataTo(ITaskItem destinationItem)
-            {
-                throw new NotImplementedException();
-            }
-
-            public string GetMetadata(string metadataName)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void RemoveMetadata(string metadataName)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void SetMetadata(string metadataName, string metadataValue)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         [STAThread]
         static void Main(string[] args)
         {
@@ -89,27 +35,6 @@ namespace TestHost
             {
                 LoadAssemblies();
                 new Program().Compose();
-            }
-        }
-
-        public class DisposableTiming : IDisposable
-        {
-            private string message;
-            private Stopwatch sw;
-
-            public DisposableTiming(string message)
-            {
-                this.sw = Stopwatch.StartNew();
-                this.message = message;
-            }
-
-            public void Dispose()
-            {
-                Console.WriteLine(message + ": " + sw.Elapsed.ToString("s\\.fff"));
-                if (message == "Everything")
-                {
-                    Log(sw.Elapsed.ToString("s\\.fff"));
-                }
             }
         }
 
@@ -200,67 +125,7 @@ namespace TestHost
         //    }
         //}
 
-        public class BuildEngine : IBuildEngine
-        {
-            public int ColumnNumberOfTaskNode
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public bool ContinueOnError
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public int LineNumberOfTaskNode
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public string ProjectFileOfTaskNode
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void LogCustomEvent(CustomBuildEventArgs e)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void LogErrorEvent(BuildErrorEventArgs e)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void LogMessageEvent(BuildMessageEventArgs e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            public void LogWarningEvent(BuildWarningEventArgs e)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private static void Log(string elapsed)
+        public static void Log(string elapsed)
         {
             File.AppendAllText("E:\\elapsed.txt", elapsed + Environment.NewLine);
         }

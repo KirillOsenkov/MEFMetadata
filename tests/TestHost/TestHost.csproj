@@ -25,6 +25,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisposableTiming.cs" />
+    <Compile Include="MockBuildEngine.cs" />
+    <Compile Include="MockTaskItem.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
