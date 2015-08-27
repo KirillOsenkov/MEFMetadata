@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 
+#pragma warning disable 414
+
 namespace TestAssemblyA
 {
     [Export]
