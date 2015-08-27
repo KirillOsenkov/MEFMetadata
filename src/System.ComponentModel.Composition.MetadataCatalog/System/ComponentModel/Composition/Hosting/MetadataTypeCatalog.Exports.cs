@@ -56,7 +56,7 @@ namespace System.ComponentModel.Composition.Hosting
 
                     if (exportAttribute.GetType() == typeofInheritedExport)
                     {
-                        // Any InheritedExports on the type itself are contributed during this pass 
+                        // Any InheritedExports on the type itself are contributed during this pass
                         // and we need to do the book keeping for those.
                         if (!contractNamesOnNonInterfaces.Contains(contractName))
                         {

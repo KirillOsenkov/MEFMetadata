@@ -57,7 +57,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the part definitions of the catalog.
         /// </summary>
         /// <value>
-        ///     A <see cref="IQueryable{T}"/> of <see cref="ComposablePartDefinition"/> objects of the 
+        ///     A <see cref="IQueryable{T}"/> of <see cref="ComposablePartDefinition"/> objects of the
         ///     <see cref="MetadataTypeCatalog"/>.
         /// </value>
         /// <exception cref="ObjectDisposedException">
@@ -101,13 +101,13 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the export definitions that match the constraint defined by the specified definition.
         /// </summary>
         /// <param name="definition">
-        ///     The <see cref="ImportDefinition"/> that defines the conditions of the 
+        ///     The <see cref="ImportDefinition"/> that defines the conditions of the
         ///     <see cref="ExportDefinition"/> objects to return.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the 
-        ///     <see cref="ExportDefinition"/> objects and their associated 
-        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined 
+        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the
+        ///     <see cref="ExportDefinition"/> objects and their associated
+        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined
         ///     by <paramref name="definition"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -118,8 +118,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <remarks>
         ///     <note type="inheritinfo">
-        ///         Overriders of this property should never return <see langword="null"/>, if no 
-        ///         <see cref="ExportDefinition"/> match the conditions defined by 
+        ///         Overriders of this property should never return <see langword="null"/>, if no
+        ///         <see cref="ExportDefinition"/> match the conditions defined by
         ///         <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         ///     </note>
         /// </remarks>
@@ -243,7 +243,7 @@ namespace System.ComponentModel.Composition.Hosting
             }
 
             if (count > displayCount)
-            {   // Add an elipse to indicate that there 
+            {   // Add an elipse to indicate that there
                 // are more types than actually listed
                 builder.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
                 builder.Append(" ...");
