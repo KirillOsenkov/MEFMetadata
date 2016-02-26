@@ -153,12 +153,12 @@ namespace System.ComponentModel.Composition
 
         private void DumpImport(ComposablePartDefinition part, ImportDefinition i)
         {
-            Dump("  Import: " + i.ToString());
+            //Dump("    Import: " + i.ToString());
         }
 
         private void DumpExport(ComposablePartDefinition part, ExportDefinition e)
         {
-            Dump("  Export: " + e.ToString());
+            //Dump("    Export: " + e.ToString());
         }
 
         private void Dump(string p)

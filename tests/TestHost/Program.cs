@@ -127,7 +127,7 @@ namespace TestHost
 
         public static void Log(string elapsed)
         {
-            File.AppendAllText("E:\\elapsed.txt", elapsed + Environment.NewLine);
+            File.AppendAllText("D:\\elapsed.txt", elapsed + Environment.NewLine);
         }
 
         private void Compose()
@@ -140,8 +140,8 @@ namespace TestHost
 
             using (Timing("Composition"))
             {
-#if false
-                CompositionDumper.TimeComposition(catalogs, "E:\\2.txt");
+#if true
+                CompositionDumper.TimeComposition(catalogs, "D:\\1.txt");
 #else
                 CompositionDumper.TimeComposition(catalogs);
 #endif
@@ -152,13 +152,14 @@ namespace TestHost
         {
             string[] componentAssemblyFiles = new string[]
             {
-                "Microsoft.VisualStudio.Text.Logic.dll",
-                "Microsoft.VisualStudio.Text.UI.dll",
-                "Microsoft.VisualStudio.Text.UI.Wpf.dll",
-                "Microsoft.Language.Xml.Editor.dll",
+                //"Microsoft.VisualStudio.Text.Logic.dll",
+                //"Microsoft.VisualStudio.Text.UI.dll",
+                //"Microsoft.VisualStudio.Text.UI.Wpf.dll",
+                //"Microsoft.Language.Xml.Editor.dll",
+                "Microsoft.VisualStudio.Editor.Implementation, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             };
 
-            return componentAssemblyFiles.Select(s => Path.Combine(Environment.CurrentDirectory, s)).ToArray();
+            return componentAssemblyFiles.Select(s => Assembly.Load(s).Location).ToArray();
         }
 
         private AggregateCatalog CreateCatalog()
